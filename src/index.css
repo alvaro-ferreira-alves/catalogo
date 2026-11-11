@@ -1,0 +1,144 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+/* Digital Menu Design System - Warm & Appetizing */
+
+@layer base {
+  :root {
+    --background: 30 25% 98%;
+    --foreground: 20 20% 15%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 20 20% 15%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 20 20% 15%;
+
+    --primary: 24 95% 53%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 30 20% 94%;
+    --secondary-foreground: 20 20% 25%;
+
+    --muted: 30 15% 92%;
+    --muted-foreground: 20 10% 45%;
+
+    --accent: 142 70% 45%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 30 15% 88%;
+    --input: 30 15% 88%;
+    --ring: 24 95% 53%;
+
+    --radius: 0.75rem;
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 24 95% 53%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 30 20% 94%;
+    --sidebar-accent-foreground: 20 20% 25%;
+    --sidebar-border: 30 15% 88%;
+    --sidebar-ring: 24 95% 53%;
+
+    /* Custom tokens */
+    --success: 142 70% 45%;
+    --success-foreground: 0 0% 100%;
+    --warning: 45 93% 47%;
+    --warning-foreground: 20 20% 15%;
+    --info: 199 89% 48%;
+    --info-foreground: 0 0% 100%;
+    
+    /* Gradient tokens */
+    --gradient-primary: linear-gradient(135deg, hsl(24 95% 53%), hsl(35 95% 55%));
+    --gradient-success: linear-gradient(135deg, hsl(142 70% 45%), hsl(152 70% 50%));
+    
+    /* Shadow tokens */
+    --shadow-sm: 0 1px 2px 0 hsl(20 20% 15% / 0.05);
+    --shadow-md: 0 4px 6px -1px hsl(20 20% 15% / 0.1), 0 2px 4px -2px hsl(20 20% 15% / 0.1);
+    --shadow-lg: 0 10px 15px -3px hsl(20 20% 15% / 0.1), 0 4px 6px -4px hsl(20 20% 15% / 0.1);
+    --shadow-xl: 0 20px 25px -5px hsl(20 20% 15% / 0.1), 0 8px 10px -6px hsl(20 20% 15% / 0.1);
+    --shadow-primary: 0 4px 14px 0 hsl(24 95% 53% / 0.35);
+  }
+
+  .dark {
+    --background: 20 15% 8%;
+    --foreground: 30 15% 95%;
+
+    --card: 20 15% 12%;
+    --card-foreground: 30 15% 95%;
+
+    --popover: 20 15% 12%;
+    --popover-foreground: 30 15% 95%;
+
+    --primary: 24 95% 55%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 20 15% 18%;
+    --secondary-foreground: 30 15% 90%;
+
+    --muted: 20 15% 18%;
+    --muted-foreground: 30 10% 60%;
+
+    --accent: 142 70% 50%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 70% 45%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 20 15% 20%;
+    --input: 20 15% 20%;
+    --ring: 24 95% 55%;
+    
+    --sidebar-background: 20 15% 10%;
+    --sidebar-foreground: 30 15% 90%;
+    --sidebar-primary: 24 95% 55%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 20 15% 18%;
+    --sidebar-accent-foreground: 30 15% 90%;
+    --sidebar-border: 20 15% 20%;
+    --sidebar-ring: 24 95% 55%;
+
+    --success: 142 70% 50%;
+    --warning: 45 93% 50%;
+    --info: 199 89% 55%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Poppins', system-ui, sans-serif;
+  }
+}
+
+@layer utilities {
+  .font-heading {
+    font-family: 'Poppins', system-ui, sans-serif;
+  }
+  
+  .shadow-primary {
+    box-shadow: var(--shadow-primary);
+  }
+  
+  .gradient-primary {
+    background: var(--gradient-primary);
+  }
+  
+  .gradient-success {
+    background: var(--gradient-success);
+  }
+}
