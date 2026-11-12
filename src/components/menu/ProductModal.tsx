@@ -178,35 +178,35 @@ export function ProductModal({ product, open, onOpenChange }: ProductModalProps)
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-[420px] overflow-hidden p-0 border-none bg-background rounded-3xl shadow-2xl fixed bottom-0 top-auto sm:bottom-auto sm:top-[50%] sm:translate-y-[-50%] w-full rounded-b-none sm:rounded-b-3xl translate-y-0 transition-transform data-[state=closed]:translate-y-full sm:data-[state=closed]:translate-y-[-50%] sm:data-[state=closed]:scale-95 duration-300 [&>button:last-child]:hidden">
+      <DialogContent className="inset-x-0 bottom-0 left-0 right-0 top-auto translate-x-0 translate-y-0 sm:inset-x-auto sm:left-1/2 sm:top-1/2 sm:bottom-auto sm:-translate-x-1/2 sm:-translate-y-1/2 w-full max-w-full sm:max-w-[440px] overflow-hidden p-0 border-none bg-background rounded-t-[28px] sm:rounded-3xl shadow-2xl fixed data-[state=closed]:translate-y-full sm:data-[state=closed]:translate-y-[-50%] sm:data-[state=closed]:scale-95 duration-300 [&>button:last-child]:hidden max-h-[92dvh] sm:max-h-[90vh] flex flex-col">
         
         {/* Botão fechar (X) circular no canto superior direito */}
         <button
           type="button"
           onClick={() => onOpenChange(false)}
           aria-label="Fechar"
-          className="absolute top-3.5 right-3.5 z-20 w-8 h-8 rounded-full bg-white/90 shadow-md flex items-center justify-center text-foreground/80 hover:text-foreground hover:bg-white transition-all active:scale-95"
+          className="absolute top-3 right-3 z-30 w-8 h-8 rounded-full bg-background/90 backdrop-blur-sm shadow-md border border-border/50 flex items-center justify-center text-foreground hover:bg-background transition-all active:scale-95"
         >
           <X className="h-4 w-4" />
         </button>
 
-        <div className="flex flex-col max-h-[85vh] sm:max-h-[90vh]">
-          <div className="flex-1 overflow-y-auto">
-            {/* Imagem do Produto */}
+        <div className="flex flex-col flex-1 min-h-0 overflow-hidden w-full max-w-full">
+          <div className="flex-1 overflow-y-auto overscroll-contain overflow-x-hidden">
+            {/* Imagem do Produto adaptável para mobile */}
             {product.image_url && !imageError ? (
-              <div className="relative w-full aspect-[16/10] bg-muted/20 overflow-hidden flex items-center justify-center">
+              <div className="relative w-full h-44 sm:h-52 bg-[#FAF7F2] dark:bg-muted/20 overflow-hidden flex items-center justify-center">
                 <img
                   src={product.image_url}
                   alt={product.name}
                   onError={() => setImageError(true)}
-                  className="w-full h-full object-contain p-4"
+                  className="w-full h-full object-contain p-2 sm:p-3 transition-transform duration-200"
                 />
               </div>
             ) : (
-              <div className="w-full h-12" />
+              <div className="w-full h-10" />
             )}
 
-            <div className="p-5 pt-3 space-y-4">
+            <div className="p-4 sm:p-5 pt-3 space-y-4 pb-6 w-full max-w-full box-border">
               {/* Informações: Categoria/Marca, Nome e Preço */}
               <DialogHeader className="text-left space-y-1">
                 {categoryName && (
@@ -358,53 +358,57 @@ export function ProductModal({ product, open, onOpenChange }: ProductModalProps)
           </div>
 
           {/* Rodapé com seletor de quantidade e botão Adicionar */}
-          <div className="shrink-0 p-4 pt-3 border-t bg-background pb-[calc(1.25rem+env(safe-area-inset-bottom))]">
-            <div className="flex items-center gap-3">
-              {/* Seletor de quantidade arredondado */}
-              <div className="flex items-center justify-between rounded-full border border-border bg-background px-1.5 py-1 h-12 w-28 shrink-0">
+          <div className="shrink-0 p-3 sm:p-4 pt-2.5 border-t bg-background pb-[calc(1rem+env(safe-area-inset-bottom))] w-full">
+            <div className="flex items-center gap-2 sm:gap-3 w-full">
+              {/* Seletor de quantidade arredondado e compacto no mobile */}
+              <div className="flex items-center justify-between rounded-full border border-border bg-background px-1 sm:px-1.5 py-0.5 h-11 sm:h-12 w-24 sm:w-28 shrink-0">
                 <Button
                   variant="ghost"
                   size="icon"
-                  className="h-8 w-8 rounded-full hover:bg-muted text-foreground"
+                  className="h-7 w-7 sm:h-8 sm:w-8 rounded-full hover:bg-muted text-foreground"
                   onClick={handleDecreaseQuantity}
                   disabled={quantity <= 1}
                 >
-                  <Minus className="h-4 w-4" />
+                  <Minus className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
                 </Button>
 
-                <span className="font-semibold text-base w-6 text-center select-none">
+                <span className="font-semibold text-sm sm:text-base w-5 sm:w-6 text-center select-none">
                   {quantity}
                 </span>
 
                 <Button
                   variant="ghost"
                   size="icon"
-                  className="h-8 w-8 rounded-full hover:bg-muted text-foreground"
+                  className="h-7 w-7 sm:h-8 sm:w-8 rounded-full hover:bg-muted text-foreground"
                   onClick={handleIncreaseQuantity}
                 >
-                  <Plus className="h-4 w-4" />
+                  <Plus className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
                 </Button>
               </div>
 
-              {/* Botão Adicionar grande arredondado */}
+              {/* Botão Adicionar grande arredondado, 100% responsivo sem estourar */}
               <Button
                 onClick={handleAdd}
                 className={cn(
-                  'flex-1 h-12 rounded-full text-base font-semibold transition-all shadow-sm flex items-center justify-center gap-1.5',
+                  'flex-1 min-w-0 h-11 sm:h-12 rounded-full text-xs sm:text-sm md:text-base font-semibold transition-all shadow-sm flex items-center justify-center gap-1 sm:gap-1.5 px-2 sm:px-4',
                   !isComplete
                     ? 'bg-primary/70 hover:bg-primary/80 text-primary-foreground'
                     : 'bg-primary hover:bg-primary/95 text-primary-foreground active:scale-[0.99]'
                 )}
               >
-                <span>
-                  {!isComplete
-                    ? totalSelectedFlavors === 0
-                      ? 'Escolha os sabores'
-                      : `Faltam ${quantity - totalSelectedFlavors} sabor${quantity - totalSelectedFlavors > 1 ? 'es' : ''}`
-                    : 'Adicionar'}
-                </span>
-                <span>•</span>
-                <span>{formatPrice(unitTotal * quantity)}</span>
+                {!isComplete ? (
+                  <span className="truncate">
+                    {totalSelectedFlavors === 0
+                      ? 'Escolha o sabor'
+                      : `Faltam ${quantity - totalSelectedFlavors}`}
+                  </span>
+                ) : (
+                  <>
+                    <span className="truncate">Adicionar</span>
+                    <span>•</span>
+                    <span className="shrink-0">{formatPrice(unitTotal * quantity)}</span>
+                  </>
+                )}
               </Button>
             </div>
           </div>
